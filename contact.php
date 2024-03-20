@@ -28,8 +28,7 @@
                 </div>
 
 
-                <button  class="btn" onclick="send_message()"
-                    style="background-color: blueviolet;">Send Message</button>
+                <button class="btn" onclick="send_message()" style="background-color: blueviolet;">Send Message</button>
 
             </form>
         </div>
@@ -58,18 +57,26 @@
         else if (phone == '') {
             alert("Please enter phone");
         }
+        else if (!isValidPakistaniNumber(phone)) {
+            alert("Please enter a valid phone number");
+        }
         else if (message == '') {
             alert("Please enter message");
         } else {
             jQuery.ajax({
-                url : "contact_us.php",
-                type : "post",
-                data : "name=" + name + "&email=" + email + "&phone=" + phone + "&message=" + message,
-                success: function(result){
+                url: "contact_us.php",
+                type: "post",
+                data: "name=" + name + "&email=" + email + "&phone=" + phone + "&message=" + message,
+                success: function (result) {
                     alert(result);
                 }
             });
         }
+    }
+    function isValidPakistaniNumber(phone) {
+        // Regular expression for a Pakistani phone number
+        var regex = /^(\+92|92|0)-?3\d{2}-?\d{7}$/;
+        return regex.test(phone);
     }
 </script>
 <?php require("footer.php") ?>
